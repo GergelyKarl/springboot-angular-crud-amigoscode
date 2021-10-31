@@ -14,11 +14,12 @@ export class ServerService {
 
   constructor(private http: HttpClient) {}
 
-  servers$ = <Observable<CustomResponse>>(
-    this.http
-      .get<CustomResponse>(`${this.apiUrl}/server/list`)
-      .pipe(tap(console.log), catchError(this.handleError))
-  );
+  servers$ = 
+    <Observable<CustomResponse>>(
+      this.http
+        .get<CustomResponse>(`${this.apiUrl}/server/list`)
+        .pipe(tap(console.log), catchError(this.handleError))
+    );
 
   save$ = (server: Server) =>
     <Observable<CustomResponse>>(
@@ -43,7 +44,7 @@ export class ServerService {
 
   filter$ = (status: Status, response: CustomResponse) =>
     <Observable<CustomResponse>>new Observable<CustomResponse>((subscriber) => {
-      console.log(response);
+
       subscriber.next(
         status === Status.ALL
           ? { ...response, message: `Servers filtered by ${status} status` }
